@@ -1,0 +1,7 @@
+{
+  "name": "EasyTicket",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
