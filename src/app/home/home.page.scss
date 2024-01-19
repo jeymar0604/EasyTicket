@@ -17,7 +17,7 @@
   font-size: 16px;
   line-height: 22px;
 
-  color: #8c8c8c;
+  color: #868181;
 
   margin: 0;
 }
@@ -25,3 +25,23 @@
 #container a {
   text-decoration: none;
 }
+
+//Slides
+swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+swiper-slide {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: safe;
+}
+
+.avatar-slide {
+  --border-radius: 30px;
+}
+
+//mis voletos
