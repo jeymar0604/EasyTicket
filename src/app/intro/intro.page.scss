@@ -72,7 +72,7 @@ swiper-slide {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80%; //Altura deseada
+  height: 80%;
   color: black;
 }
 
@@ -81,8 +81,9 @@ swiper-slide {
   flex-direction: column;
   align-items: center;
   justify-content: safe;
+  height: 290px;
   text-align: center;
-  height: 295px; //Altura deseada
+  width: 2px;
   color: black;
   font-size: 30px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
