@@ -32,5 +32,5 @@ export class AppComponent {
     this.storage.set('MostreLaIntro', true)
   }
 
-  menuType: string = 'reveal';
+  menuType: string = 'overlay';
 }
