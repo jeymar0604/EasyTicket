@@ -26,6 +26,13 @@
   text-decoration: none;
 }
 
+h1 {
+  text-align: center;
+  font-size: 20px;
+  font-family: fantasy;
+  color: blueviolet;
+}
+
 //Slides
 swiper-container {
   width: 100%;
@@ -33,15 +40,14 @@ swiper-container {
 }
 
 swiper-slide {
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: safe;
 }
 
-.avatar-slide {
-  --border-radius: 30px;
-}
 
-//mis voletos
+.fondo {
+  background-image: url('../../assets/images/inprogress.svg');
+  background-size: cover;
+}

@@ -1,3 +1,20 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu [type]="menuType" menuId="principal" contentId="main-content">
+    <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item (click)="goToHome()">Home</ion-item>
+        <ion-item (click)="goToIntro()">Intro</ion-item>
+        <!-- Agrega más elementos según sea necesario -->
+      </ion-list>
+      <ion-menu-toggle>
+        <ion-button>X</ion-button>
+      </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>
