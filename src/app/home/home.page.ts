@@ -12,6 +12,6 @@ export class HomePage {
   constructor(
     private router: Router,
     private storage: Storage) { }
-
+    
 
 }

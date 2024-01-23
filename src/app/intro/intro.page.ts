@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage-angular';
   selector: 'app-intro',
   templateUrl: './intro.page.html',
   styleUrls: ['./intro.page.scss'],
-  
+
 })
 export class IntroPage implements OnInit {
 
@@ -42,13 +42,9 @@ export class IntroPage implements OnInit {
     private router: Router,
     private storage: Storage) { }
 
-  ngOnInit() {
-  }
-
-  goBack() {
-    this.router.navigateByUrl('/home')
-    this.storage.set('VolverHome', true)
-  }
+    ngOnInit() {
+      
+    }
 
   goToRegister() {
     this.router.navigateByUrl('/home')
@@ -58,5 +54,10 @@ export class IntroPage implements OnInit {
   goToLogin() {
     this.router.navigateByUrl('/home')
     this.storage.set('MostrarLogin', true)
+  }
+
+  ionViewDidEnter() {
+    console.log('Ya vi la intro')
+    this.storage.set('MostreLaIntro', true)
   }
 }
