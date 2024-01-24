@@ -52,12 +52,16 @@ export class IntroPage implements OnInit {
   }
 
   goToLogin() {
-    this.router.navigateByUrl('/home')
+    this.router.navigateByUrl('/login')
     this.storage.set('MostrarLogin', true)
   }
 
   ionViewDidEnter() {
     console.log('Ya vi la intro')
-    this.storage.set('MostreLaIntro', true)
+    this.storage.set('ViLaIntro', true).then(() => {
+      //Despues de almacenar en el storage que ya vio la intro
+      //almacena la constante del guard que si la mostro para que se ejecute
+      this.storage.set('MostreLaIntro', true)
+    });
   }
 }

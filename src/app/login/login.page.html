@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center ion-text-uppercase">login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <figure class="ion-text-center">
+    <ion-avatar class="center-avatar">
+      <img src="../../assets/images/user.jpg" alt="usuario">
+    </ion-avatar>
+  </figure>
+
+  <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+
+    <ion-item>
+      <ion-input label="Email" formControlName="email" labelPlacement="floating" placeholder="Email" [clearInput]="true">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="password" formControlName="password" labelPlacement="floating" placeholder="Pasword" [clearInput]="true">
+      </ion-input>
+    </ion-item>
+
+    <ion-button type="ngSubmit" fill="outline" shape="round" expand="full">
+      Login
+    </ion-button>
+
+  </form>
+</ion-content>

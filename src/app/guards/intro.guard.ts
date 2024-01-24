@@ -11,10 +11,10 @@ export class IntroGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private storage: Storage) {}
+    private storage: Storage) { }
 
   async canActivate() {
-    const mostreIntro = await this.storage.get('MostreLaIntro')
+    const mostreIntro = await this.storage.get('MostreLaIntro');
     if (mostreIntro) {
       return true;
     } else {
@@ -22,5 +22,5 @@ export class IntroGuard implements CanActivate {
       return false;
     }
   }
-  
+
 }
