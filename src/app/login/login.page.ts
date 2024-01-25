@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +13,24 @@ import { AlertController } from '@ionic/angular';
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup; //Declara la propiedad de loginForm
+  validation_messages = {
+    email: [
+      { type: "required", message: "El Email es obligatorio." },
+      { type: "pattern", message: "El Email ingresado no es valido." }
+    ],
+    password: [
+      { type: "required", message: "El password es obligatorio." },
+      { type: "pattern", message: "El Password ingresado no es valido. La contraseña debe contener al menos 8 caracteres, una letra, un número y un carácter especial ($@!%*?&+-_)" }
+    ]
+  }
+
+  loginMessage: any;
 
   constructor(
+    private navCtrl: NavController,
     private formBuilder: FormBuilder,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private authService: AuthService,
   ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl(
@@ -21,7 +38,7 @@ export class LoginPage implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.pattern(
-            "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.+[a-zA-Z0-9-.]+$"
+            "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
           )
         ])
       ),
@@ -54,7 +71,13 @@ export class LoginPage implements OnInit {
     const emailControl = this.loginForm.get('email');
     const passwordControl = this.loginForm.get('password');
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      console.log(login_data);
+      this.authService.loginUser(login_data).then(res => {
+        this.loginMessage = res;
+        this.navCtrl.navigateForward('/home');
+      }).catch(err => {
+        this.loginMessage = err;
+      });
     } else {
       if (emailControl && emailControl.hasError('pattern')) {
         this.presentAlert('El formato del correo electrónico es incorrecto.');
@@ -65,4 +88,6 @@ export class LoginPage implements OnInit {
       }
     }
   }
+
+
 }

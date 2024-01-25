@@ -2,7 +2,10 @@
   <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-buttons slot="end">
-        <ion-back-button defaultHref="/home"></ion-back-button>
+        <ion-button (click)="goToHome()" size="small" fill="Clear">
+          <ion-back-button defaultHref="">
+          </ion-back-button>
+        </ion-button>
       </ion-buttons>
       <ion-title><img src="../../assets/icon/easyticket1.jpg" style="max-width: 15%;"
           alt="logo_EasyTicket" /></ion-title>

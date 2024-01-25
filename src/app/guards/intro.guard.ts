@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { Storage } from '@ionic/storage-angular';
 export class IntroGuard implements CanActivate {
 
   constructor(
-    private router: Router,
+    private navCtrl: NavController,
     private storage: Storage) { }
 
   async canActivate() {
@@ -18,7 +18,7 @@ export class IntroGuard implements CanActivate {
     if (mostreIntro) {
       return true;
     } else {
-      this.router.navigateByUrl('/intro');
+      this.navCtrl.navigateForward('/intro');
       return false;
     }
   }

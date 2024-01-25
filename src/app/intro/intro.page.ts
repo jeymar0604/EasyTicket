@@ -42,9 +42,14 @@ export class IntroPage implements OnInit {
     private router: Router,
     private storage: Storage) { }
 
-    ngOnInit() {
-      
-    }
+  ngOnInit() {
+
+  }
+
+  goToHome() {
+    this.router.navigateByUrl('/home')
+    this.storage.set('VolverHome', true)
+  }
 
   goToRegister() {
     this.router.navigateByUrl('/home')

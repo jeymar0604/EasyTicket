@@ -14,18 +14,39 @@
   <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
 
     <ion-item>
-      <ion-input label="Email" formControlName="email" labelPlacement="floating" placeholder="Email" [clearInput]="true">
+      <ion-input label="Email" type="email" formControlName="email" labelPlacement="floating" placeholder="Email"
+        [clearInput]="true" errorText="Email inavalido (Obligatorio)">
       </ion-input>
     </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div *ngIf="
+        (loginForm.get('email')?.hasError(validation.type) &&
+        loginForm.get('email')?.dirty)">{{validation.message}}
+      </div>
+      </ng-container>
+    </div>
 
     <ion-item>
-      <ion-input label="password" formControlName="password" labelPlacement="floating" placeholder="Pasword" [clearInput]="true">
+      <ion-input label="Password" type="password" formControlName="password" labelPlacement="floating"
+        placeholder="Pasword" [clearInput]="true" errorText="Password invalida (Obligatorio)">
       </ion-input>
     </ion-item>
+    <div class="validation-message">
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div *ngIf="
+        (loginForm.get('password')?.hasError(validation.type) &&
+        loginForm.get('password')?.dirty)">{{validation.message}}
+      </div>
+      </ng-container>
+    </div>
 
     <ion-button type="ngSubmit" fill="outline" shape="round" expand="full">
       Login
     </ion-button>
 
   </form>
+  <div class="validation-message">
+    {{loginMessage}}
+  </div>
 </ion-content>
