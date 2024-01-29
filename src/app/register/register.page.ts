@@ -45,7 +45,6 @@ export class RegisterPage implements OnInit {
           Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$@!%*?&+-_])/), // Al menos una letra; Al menos un número; Al menos un carácter especial
         ])
       ),
-      //Crear validaciones para el password, confirmation_password, name y last_name
       confirmation_password: new FormControl(
         "",
         Validators.compose([
@@ -98,6 +97,14 @@ export class RegisterPage implements OnInit {
       this.registerMessage = err;
     });
   }
+  showSuccessMessage() {
+    // Muestra un mensaje de éxito durante 1 segundo
+    this.registerMessage = '¡Registro exitoso!';
+    setTimeout(() => {
+      this.registerMessage = ''; // Limpia el mensaje después de 1 segundo
+      this.navCtrl.navigateForward('/login'); // Redirige a la página de inicio de sesión
+    }, 1000); // 1000 milisegundos = 1 segundo
+  }
 
   //mensajes de error y validacion 
   getErrorMessage(controlName: string): string {
@@ -130,15 +137,6 @@ export class RegisterPage implements OnInit {
     } else if (field === 'confirmation_password') {
       this.confirmationPasswordHidden = !this.confirmationPasswordHidden;
     }
-  }
-
-  showSuccessMessage() {
-    // Muestra un mensaje de éxito durante 2 segundos
-    this.registerMessage = '¡Registro exitoso!';
-    setTimeout(() => {
-      this.registerMessage = ''; // Limpia el mensaje después de 2 segundos
-      this.navCtrl.navigateForward('/login'); // Redirige a la página de inicio de sesión
-    }, 1000); // 2000 milisegundos = 2 segundos
   }
 
 }

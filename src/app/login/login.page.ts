@@ -83,7 +83,7 @@ export class LoginPage implements OnInit {
   }
 
   togglePasswordVisibility() {
-    this.passwordHidden = !this.passwordHidden;
+    this.passwordHidden = !this.passwordHidden; 
   }
 
 }

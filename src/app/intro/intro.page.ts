@@ -43,7 +43,7 @@ export class IntroPage implements OnInit {
     private storage: Storage) { }
 
   ngOnInit() {
-
+    
   }
 
   goToHome() {
