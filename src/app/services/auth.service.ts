@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, resolveForwardRef } from '@angular/core';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  
   constructor() { }
 
   loginUser(credential: any) {
@@ -16,5 +17,16 @@ export class AuthService {
         reject('Login Incorrecto.')
       }
     });
+  }
+
+  registerUser(userData: any) {
+    return new Promise((resolve, reject) =>{
+      if (userData.email != 'jeyson@gmail.com') {
+        resolve('Registro Exitoso')
+      } else {
+        reject('EL email ya está registrado')
+      }
+    });
+
   }
 }

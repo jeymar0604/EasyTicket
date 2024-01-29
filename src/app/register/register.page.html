@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons>
+      <ion-title class="ion-text-center ion-text-uppercase">register</ion-title>
+      <ion-back-button slot="end" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <figure class="ion-text-center">
+    <ion-avatar class="center-avatar">
+      <img src="../../assets/images/user.jpg" alt="usuario">
+    </ion-avatar>
+  </figure>
+
+  <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+    <ion-list [inset]="true" lines="inset">
+      <ion-item>
+        <ion-input label="Name" type="text" formControlName="name" labelPlacement="floating" placeholder="Name"
+          [clearInput]="true">
+        </ion-input>
+        <ion-note *ngIf="isInvalid('name')" color="danger">{{ getErrorMessage('name') }}
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Last Name" type="text" formControlName="last_name" labelPlacement="floating"
+          placeholder="Last Name" [clearInput]="true">
+        </ion-input>
+        <ion-note *ngIf="isInvalid('last_name')" color="danger">{{ getErrorMessage('last_name') }}
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Email" type="email" formControlName="email" labelPlacement="floating" placeholder="Email"
+          [clearInput]="true">
+        </ion-input>
+        <ion-note *ngIf="isInvalid('email')" color="danger">{{ getErrorMessage('email') }} </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Password" [type]="passwordHidden ? 'password' : 'text'" formControlName="password"
+          placeholder="Password" labelPlacement="floating" [clearInput]="true">
+          <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility('password')"
+            *ngIf="registerForm.get('password')?.value">
+            <ion-icon [name]="passwordHidden ? 'eye' : 'eye-off'"></ion-icon>
+          </ion-button>
+        </ion-input>
+        <ion-note *ngIf="isInvalid('password')" color="danger">{{ getErrorMessage('password') }}</ion-note>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-input label="Confirmation Password" [type]="confirmationPasswordHidden ? 'password' : 'text'"
+          formControlName="confirmation_password" placeholder="Password" labelPlacement="floating" [clearInput]="true">
+          <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility('confirmation_password')"
+            *ngIf="registerForm.get('confirmation_password')?.value">
+            <ion-icon [name]="confirmationPasswordHidden ? 'eye' : 'eye-off'"></ion-icon>
+          </ion-button>
+        </ion-input>
+        <ion-note *ngIf="isInvalid('confirmation_password')" color="danger">{{ getErrorMessage('confirmation_password')
+          }}
+        </ion-note>
+      </ion-item>
+      <div class="ion-text-center">
+        <ion-button type="ngSubmit" fill="solid" shape="round" expand="block" [disabled]="!registerForm.valid"
+          color="tertiary">
+          Register
+        </ion-button>
+        <p>¿Ya tienes cuenta? <a href="/login">Click aquí</a></p>
+      </div>
+    </ion-list>
+  </form>
+  <div class="validation-message">
+    {{registerMessage}}
+  </div>
+</ion-content>

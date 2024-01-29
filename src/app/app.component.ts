@@ -24,17 +24,26 @@ export class AppComponent {
 
   goToHome(){
     this.router.navigateByUrl('/home')
+    console.log('Mostar Home (menú)')
     this.storage.set('MostrarHome', true)
   }
 
   goToIntro(){
     this.router.navigateByUrl('/intro')
+    console.log('Mostar Intro (menú)')
     this.storage.set('MostrarIntro', true)
   }
 
   goToLogin(){
     this.router.navigateByUrl('/login')
+    console.log('Mostar Login (menú)')
     this.storage.set('MostrarLogin', true)
+  }
+
+  goToRegister(){
+    this.router.navigateByUrl('/register')
+    console.log('Mostar Register (menú)')
+    this.storage.set('MostrarRegister', true)
   }
 
   menuType: string = 'overlay';

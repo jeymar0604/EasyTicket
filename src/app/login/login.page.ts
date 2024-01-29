@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-login',
@@ -13,24 +14,16 @@ import { NavController } from '@ionic/angular';
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup; //Declara la propiedad de loginForm
-  validation_messages = {
-    email: [
-      { type: "required", message: "El Email es obligatorio." },
-      { type: "pattern", message: "El Email ingresado no es valido." }
-    ],
-    password: [
-      { type: "required", message: "El password es obligatorio." },
-      { type: "pattern", message: "El Password ingresado no es valido. La contraseña debe contener al menos 8 caracteres, una letra, un número y un carácter especial ($@!%*?&+-_)" }
-    ]
-  }
 
   loginMessage: any;
+
+  passwordHidden: boolean = true;
 
   constructor(
     private navCtrl: NavController,
     private formBuilder: FormBuilder,
-    private alertController: AlertController,
     private authService: AuthService,
+    private storage: Storage
   ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl(
@@ -38,7 +31,7 @@ export class LoginPage implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.pattern(
-            "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
+            "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           )
         ])
       ),
@@ -57,37 +50,40 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  async presentAlert(message: string) {
-    const alert = await this.alertController.create({
-      header: 'Error de Validación',
-      message: message,
-      buttons: ['OK']
+  login(login_data: any) {
+    console.log(login_data);
+    this.authService.loginUser(login_data).then(res => {
+      this.loginMessage = res;
+      this.storage.set('userLoggedIn', true);
+      this.navCtrl.navigateForward('/home');
+    }).catch(err => {
+      this.loginMessage = err;
     });
-
-    await alert.present();
   }
 
-  login(login_data: any) {
-    const emailControl = this.loginForm.get('email');
-    const passwordControl = this.loginForm.get('password');
-    if (this.loginForm.valid) {
-      console.log(login_data);
-      this.authService.loginUser(login_data).then(res => {
-        this.loginMessage = res;
-        this.navCtrl.navigateForward('/home');
-      }).catch(err => {
-        this.loginMessage = err;
-      });
-    } else {
-      if (emailControl && emailControl.hasError('pattern')) {
-        this.presentAlert('El formato del correo electrónico es incorrecto.');
-      } else if (passwordControl && passwordControl.hasError('pattern')) {
-        this.presentAlert('La contraseña debe contener al menos 8 caracteres, una letra, un número y un carácter especial ($@!%*?&+-_)');
-      } else {
-        this.presentAlert('Por favor, completa todos los campos correctamente.');
+  //mensajes de error y validacion 
+  getErrorMessage(controlName: string): string {
+    const control = this.loginForm.get(controlName);
+    if (control?.hasError('required')) {
+      return 'Este campo es obligatorio.';
+    } else if (control?.hasError('pattern')) {
+      if (controlName == 'email') {
+        return 'El email es invalido.';
+      }
+      else if (controlName == 'password') {
+        return 'El password es invalido.';
       }
     }
+    return '';
   }
 
+  isInvalid(controlName: string): boolean {
+    const control = this.loginForm.get(controlName);
+    return !!control && control.invalid && (control.dirty || control.touched);
+  }
+
+  togglePasswordVisibility() {
+    this.passwordHidden = !this.passwordHidden;
+  }
 
 }

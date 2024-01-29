@@ -52,7 +52,7 @@ export class IntroPage implements OnInit {
   }
 
   goToRegister() {
-    this.router.navigateByUrl('/home')
+    this.router.navigateByUrl('/register')
     this.storage.set('MostrarRegister', true)
   }
 
@@ -63,10 +63,6 @@ export class IntroPage implements OnInit {
 
   ionViewDidEnter() {
     console.log('Ya vi la intro')
-    this.storage.set('ViLaIntro', true).then(() => {
-      //Despues de almacenar en el storage que ya vio la intro
-      //almacena la constante del guard que si la mostro para que se ejecute
-      this.storage.set('MostreLaIntro', true)
-    });
+    this.storage.set('MostreIntro', true)
   }
 }

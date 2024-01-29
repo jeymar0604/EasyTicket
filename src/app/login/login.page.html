@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-title class="ion-text-center ion-text-uppercase">login</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,40 +12,36 @@
   </figure>
 
   <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+    <ion-list [inset]="true">
+      <ion-item>
+        <ion-input label="Email" type="email" formControlName="email" labelPlacement="floating" placeholder="Email"
+          [clearInput]="true">
+          <ion-icon slot="start" name="lock-closed" aria-hidden="false"></ion-icon>
+        </ion-input>
+        <ion-note *ngIf="isInvalid('email')" color="danger">{{ getErrorMessage('email') }} </ion-note>
+      </ion-item>
 
-    <ion-item>
-      <ion-input label="Email" type="email" formControlName="email" labelPlacement="floating" placeholder="Email"
-        [clearInput]="true" errorText="Email inavalido (Obligatorio)">
-      </ion-input>
-    </ion-item>
-    <div>
-      <ng-container *ngFor="let validation of validation_messages.email">
-        <div *ngIf="
-        (loginForm.get('email')?.hasError(validation.type) &&
-        loginForm.get('email')?.dirty)">{{validation.message}}
+      <ion-item>
+        <ion-input label="Password" [type]="passwordHidden ? 'password' : 'text'" formControlName="password"
+          placeholder="Password" labelPlacement="floating" [clearInput]="true">
+          <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility()"
+            *ngIf="loginForm.get('password')?.value">
+            <ion-icon [name]="passwordHidden ? 'eye' : 'eye-off'"></ion-icon>
+          </ion-button>
+        </ion-input>
+        <ion-note *ngIf="isInvalid('password')" color="danger">{{ getErrorMessage('password') }}</ion-note>
+      </ion-item>
+      <div class="ion-text-center">
+      <ion-button type="ngSubmit" fill="solid" shape="round" expand="block" [disabled]="!loginForm.valid"
+        color="success">
+        Login
+      </ion-button>
+
+      <p>¿No tienes cuenta? <a href="/register">Registrate aquí</a></p>
       </div>
-      </ng-container>
-    </div>
-
-    <ion-item>
-      <ion-input label="Password" type="password" formControlName="password" labelPlacement="floating"
-        placeholder="Pasword" [clearInput]="true" errorText="Password invalida (Obligatorio)">
-      </ion-input>
-    </ion-item>
-    <div class="validation-message">
-      <ng-container *ngFor="let validation of validation_messages.password">
-        <div *ngIf="
-        (loginForm.get('password')?.hasError(validation.type) &&
-        loginForm.get('password')?.dirty)">{{validation.message}}
-      </div>
-      </ng-container>
-    </div>
-
-    <ion-button type="ngSubmit" fill="outline" shape="round" expand="full">
-      Login
-    </ion-button>
-
+    </ion-list>
   </form>
+
   <div class="validation-message">
     {{loginMessage}}
   </div>

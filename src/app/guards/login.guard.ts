@@ -7,22 +7,20 @@ import { Storage } from '@ionic/storage-angular';
 @Injectable({
   providedIn: 'root'
 })
-export class IntroGuard implements CanActivate {
-
+export class LoginGuard implements CanActivate {
   constructor(
     private navCtrl: NavController,
     private storage: Storage) { }
 
   async canActivate() {
-    const mostreIntro = await this.storage.get('MostreIntro');
-    if (mostreIntro) {
-      console.log('Ya mostre la intro.');
+    const userLoggedIn = await this.storage.get('userLoggedIn');
+    if (userLoggedIn) {
+      console.log('El usuario está logueado');
       return true;
     } else {
-      console.log('No mostre la intro.');
-      this.navCtrl.navigateForward('/intro');
+      console.log('El usuario no está logueado');
+      this.navCtrl.navigateForward('/login');
       return false;
     }
   }
-
 }
