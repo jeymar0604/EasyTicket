@@ -8,10 +8,10 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content [fullscreen]="true">
-    <swiper-container>
-      <swiper-slide class="fondo">
-        <h1>App en progreso (Home)</h1>
+  <ion-content>
+    <swiper-container [pagination]="true" [slidesPerView]="3">
+      <swiper-slide *ngFor="let slide of event_list;">
+        <img src="{{slide.image}}">
       </swiper-slide>
     </swiper-container>
   </ion-content>

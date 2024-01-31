@@ -1,10 +1,10 @@
 <div class="ion-page" id="main-content">
   <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-buttons slot="end">
-        <ion-button (click)="goToHome()" size="small" fill="Clear">
-          <ion-back-button defaultHref="">
-          </ion-back-button>
+      <ion-buttons slot="start">
+        <!--<ion-menu-button slot="start" icon-only><ion-icon name="ellipsis-vertical-outline"></ion-icon></ion-menu-button>-->
+        <ion-button icon-only (click)="goToHome()" size="small" fill="Clear">
+          <ion-icon name="home-outline" size="large"></ion-icon>
         </ion-button>
       </ion-buttons>
       <ion-title><img src="../../assets/icon/easyticket1.jpg" style="max-width: 15%;"

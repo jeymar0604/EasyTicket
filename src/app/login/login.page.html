@@ -1,5 +1,11 @@
 <ion-header>
   <ion-toolbar color="success">
+    
+    <ion-buttons slot="start">
+      <ion-button icon-only (click)="goToHome()">
+        <ion-icon name="home-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title class="ion-text-center ion-text-uppercase">login</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,7 +22,7 @@
       <ion-item>
         <ion-input label="Email" type="email" formControlName="email" labelPlacement="floating" placeholder="Email"
           [clearInput]="true">
-          <ion-icon slot="start" name="lock-closed" aria-hidden="false"></ion-icon>
+          <ion-icon slot="start" name="mail-outline" aria-hidden="false"></ion-icon>
         </ion-input>
         <ion-note *ngIf="isInvalid('email')" color="danger">{{ getErrorMessage('email') }} </ion-note>
       </ion-item>
@@ -34,7 +40,7 @@
       <div class="ion-text-center">
       <ion-button type="ngSubmit" fill="solid" shape="round" expand="block" [disabled]="!loginForm.valid"
         color="success">
-        Login
+        Login <ion-icon name="log-in-outline"></ion-icon>
       </ion-button>
 
       <p>¿No tienes cuenta? <a style="text-decoration: none;" href="/register">Registrate aquí</a></p>

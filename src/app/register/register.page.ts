@@ -114,12 +114,12 @@ export class RegisterPage implements OnInit {
       return 'Este campo es obligatorio.';
     } else if (control?.hasError('pattern')) {
       if (controlName === 'email') {
-        return 'El email es incorrecto.';
+        return 'El email es invalido.';
       } else if (controlName === 'password') {
         return 'La contraseña debe contener al menos 8 caracteres, una letra, un número y un carácter especial ($@!%*?&+-_)';
       }
-    } else if (controlName === 'confirmation_password' && control?.hasError('passwordMismatch')) {
-      return 'El password no coincide';
+    } else if (control?.hasError('passwordMismatch')) {
+      return 'Los passwords no coinciden';
     }
 
     return '';
@@ -137,6 +137,11 @@ export class RegisterPage implements OnInit {
     } else if (field === 'confirmation_password') {
       this.confirmationPasswordHidden = !this.confirmationPasswordHidden;
     }
+  }
+
+  goToLogin() {
+    this.navCtrl.navigateBack('/login')
+    this.storage.set('VolverLogin', true)
   }
 
 }

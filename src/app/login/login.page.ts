@@ -50,12 +50,18 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  goToHome() {
+    this.navCtrl.navigateForward('menu/home')
+    console.log('Volver Home (login)')
+    this.storage.set('VolverHomeLogin', true)
+  }
+
   login(login_data: any) {
     console.log(login_data);
     this.authService.loginUser(login_data).then(res => {
       this.loginMessage = res;
       this.storage.set('userLoggedIn', true);
-      this.navCtrl.navigateForward('/home');
+      this.navCtrl.navigateForward('menu/home');
     }).catch(err => {
       this.loginMessage = err;
     });
