@@ -9,7 +9,6 @@ import { Storage } from '@ionic/storage-angular';
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
-
   constructor(
     private navCtrl: NavController,
     private storage: Storage
@@ -42,8 +41,9 @@ export class MenuPage implements OnInit {
     this.storage.set('MostrarRegister', true)
   }
 
-  logout(){
-    this.navCtrl.navigateRoot('/login')
+  logout() {
+    
+    this.navCtrl.navigateRoot('/login');
   }
 
   menuType: string = 'overlay';

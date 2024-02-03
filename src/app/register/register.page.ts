@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 
@@ -73,6 +71,7 @@ export class RegisterPage implements OnInit {
 
   }
 
+  // Función para verificar si las contraseñas coinciden
   passwordsMatch(control: AbstractControl): { [key: string]: any } | null {
     const passwordControl = control.root.get('password');
     const confirmPasswordControl = control.root.get('confirmation_password');
@@ -92,21 +91,23 @@ export class RegisterPage implements OnInit {
     this.authService.registerUser(register_data).then(res => {
       this.registerMessage = res;
       this.storage.set('userRegistered', true);
-      this.showSuccessMessage();
+      this.showSuccessMessage().then(() => {
+        this.registerMessage = '';
+        this.registerForm.reset();
+      });
     }).catch(err => {
       this.registerMessage = err;
     });
   }
-  showSuccessMessage() {
+  
+  async showSuccessMessage() {
     // Muestra un mensaje de éxito durante 1 segundo
     this.registerMessage = '¡Registro exitoso!';
-    setTimeout(() => {
-      this.registerMessage = ''; // Limpia el mensaje después de 1 segundo
-      this.navCtrl.navigateForward('/login'); // Redirige a la página de inicio de sesión
-    }, 1000); // 1000 milisegundos = 1 segundo
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Espera 1 segundo
+    this.navCtrl.navigateForward('/login'); // Redirige a la página de inicio de sesión
   }
 
-  //mensajes de error y validacion 
+  // Función para obtener el mensaje de error
   getErrorMessage(controlName: string): string {
     const control = this.registerForm.get(controlName);
 
@@ -127,10 +128,11 @@ export class RegisterPage implements OnInit {
 
   // Función para verificar si el campo es inválido
   isInvalid(controlName: string): boolean {
-    const control = this.registerForm.get(controlName);
-    return !!control && control.invalid && (control.dirty || control.touched);
+    const control = this.registerForm.get(controlName); //Obtiene el control del formulario
+    return !!control && control.invalid && (control.dirty || control.touched); //Devuelve verdadero si el control existe, es inválido y ha sido modificado o tocado
   }
 
+  // Función para alternar la visibilidad de la contraseña
   togglePasswordVisibility(field: string) {
     if (field === 'password') {
       this.passwordHidden = !this.passwordHidden;

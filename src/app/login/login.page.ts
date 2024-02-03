@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 
@@ -61,7 +59,10 @@ export class LoginPage implements OnInit {
     this.authService.loginUser(login_data).then(res => {
       this.loginMessage = res;
       this.storage.set('userLoggedIn', true);
-      this.navCtrl.navigateForward('menu/home');
+      this.navCtrl.navigateForward('menu/home').then(() => {
+        this.loginMessage = '';
+        this.loginForm.reset();
+      });
     }).catch(err => {
       this.loginMessage = err;
     });
@@ -89,7 +90,7 @@ export class LoginPage implements OnInit {
   }
 
   togglePasswordVisibility() {
-    this.passwordHidden = !this.passwordHidden; 
+    this.passwordHidden = !this.passwordHidden;
   }
 
 }

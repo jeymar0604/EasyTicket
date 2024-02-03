@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { NavController } from '@ionic/angular';
 
@@ -41,8 +40,8 @@ export class IntroPage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    private router: Router,
-    private storage: Storage) { }
+    private storage: Storage
+    ) { }
 
   ngOnInit() {
     

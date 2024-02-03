@@ -38,17 +38,102 @@ h1 {
 swiper-container {
   width: 100%;
   height: 100%;
-}
+}*/
 
 swiper-slide {
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: safe;
 }
 
-
+/*
 .fondo {
   background-image: url('../../assets/images/inprogress.svg');
   background-size: cover;
 }*/
+
+//Pagina Home
+.event-page {
+  padding: 20px;
+}
+
+.event-card {
+  margin-bottom: 20px;
+}
+
+.event-card ion-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.event-info {
+  display: flex;
+  align-items: flex-start;
+  margin: auto;
+  align-items: center;
+}
+
+.event-info img {
+  width: 35%; /* Ajusta el ancho según tus necesidades */
+  
+  height: auto;
+  margin-right: 10px; /* Espacio entre la imagen y los detalles */
+}
+
+.event-details{
+  padding-top: 10px; /* Espacio entre el borde superior y el título */
+  padding-bottom: 10px; /* Espacio entre los detalles y el borde inferior */
+}
+
+.event-details ion-card-title {
+  font-size: 18px;
+  margin-bottom: 5px; /* Espacio entre el título y los detalles */
+  
+}
+
+.event-details ion-card-subtitle {
+  font-size: 14px;
+  margin-top: 10px; /* Espacio entre los detalles */
+}
+
+//modal
+ion-modal {
+  --background: rgba(0, 0, 0, 0.8);
+}
+
+ion-modal .ion-padding {
+  padding: 20px;
+}
+
+ion-modal ion-header {
+  border-bottom: 1px solid #ccc;
+}
+
+ion-modal ion-title {
+  font-size: 20px;
+}
+
+ion-modal ion-content img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+ion-modal ion-item {
+  --ion-item-padding-end: 0;
+  --ion-item-padding-start: 0;
+  --ion-item-padding-bottom: 5px;
+  --ion-item-padding-top: 5px;
+}
+
+ion-modal ion-item ion-label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+ion-modal ion-text {
+  display: block;
+  font-size: 14px;
+}

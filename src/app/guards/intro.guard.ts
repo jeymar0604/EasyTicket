@@ -11,7 +11,8 @@ export class IntroGuard implements CanActivate {
 
   constructor(
     private navCtrl: NavController,
-    private storage: Storage) { }
+    private storage: Storage
+    ) { }
 
   async canActivate() {
     const mostreIntro = await this.storage.get('MostreIntro');

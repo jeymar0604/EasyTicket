@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { Storage } from '@ionic/storage-angular';
 import { EventsService } from '../services/events.service';
 
 @Component({
@@ -14,10 +12,11 @@ export class HomePage {
   category_list: any;
   category: any;
 
+  selectedEvent: any;
+  isModalOpen = false;
+
   constructor(
-    private navCtrl: NavController,
-    private storage: Storage,
-    private events: EventsService
+    private events: EventsService,
   ) { }
 
   ionViewDidEnter() {
@@ -35,18 +34,34 @@ export class HomePage {
     // Obtener categorías desde el servidor
     this.events.getCategories().then(
       res => {
-        this.category_list = res; // Asumiendo que tienes una variable category_list para almacenar las categorías
+        this.category_list = res; // Variable category_list para almacenar las categorías
         console.log("Categorias", this.category_list);
       }
     );
   
     // Obtener una categoría por ID
-    const categoryId = 1; // Reemplaza 1 con el ID de la categoría que deseas obtener
+    const categoryId = 1; // Reemplaza 1 con el ID de la categoría que se desea obtener
     this.events.getCategoryById(categoryId).then(
       res => {
-        this.category = res; // Asumiendo que tienes una variable category para almacenar la categoría
+        this.category = res; // Variable category para almacenar la categoría
         console.log("Categoría por ID", this.category);
       }
     );
+  }
+
+  //Modal para mostrar los detalles del evento
+
+  //Método para mostrar los detalles del evento
+  showEventDetails(event: any) {
+    this.selectedEvent = event; // Almacena el evento seleccionado
+  }
+
+  closeModal() {
+    this.isModalOpen = false; // Cierra el modal
+  }
+
+  //Método para abrir el modal
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen; //
   }
 }

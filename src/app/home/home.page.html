@@ -4,16 +4,90 @@
       <ion-buttons slot="start">
         <ion-menu-button menu="principal"></ion-menu-button>
       </ion-buttons>
-      <ion-title><img src="../../assets/icon/easyticket1.jpg" style="max-width: 15%;"></ion-title>
+      <ion-title
+        class="ion-text-center ion-text-uppercase">Eventos<!--<img src="../../assets/icon/easyticket1.jpg" style="max-width: 15%;">--></ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
-    <swiper-container [pagination]="true" [slidesPerView]="3">
-      <swiper-slide *ngFor="let slide of event_list;">
-        <img src="{{slide.image}}">
-      </swiper-slide>
-    </swiper-container>
-  </ion-content>
+  <ion-content class="event-page">
+    <ion-content class="event-page">
+      <div *ngFor="let event of event_list" (click)="showEventDetails(event)" (click)="setOpen(true)"
+        class="event-card">
+        <ion-card>
+          <div class="event-info">
+            <img src="{{event.image}}" alt="{{event.name}}">
+            <div class="event-details">
+              <ion-card-title>{{event.name}}</ion-card-title>
 
+              <ion-card-subtitle>
+                <ion-icon name="calendar-number"></ion-icon>
+                <strong> Fecha:</strong> {{event.event_date | date:'dd/MM/yyyy'}}
+              </ion-card-subtitle>
+              <ion-card-subtitle>
+                <ion-icon name="locate"></ion-icon>
+                <strong> Ciudad:</strong>{{event.city}}
+              </ion-card-subtitle>
+            </div>
+          </div>
+        </ion-card>
+      </div>
+    </ion-content>
+  </ion-content>
+  
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title class="ion-text-center ion-text-uppercase">Detalles del Evento</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)" icon-only><ion-icon name="close"></ion-icon></ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <img src="{{selectedEvent.image}}" alt="{{selectedEvent.name}}">
+        <ion-item>
+          <ion-label class="ion-text-center ion-text-uppercase">{{selectedEvent.name}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <ion-icon name="calendar"></ion-icon>
+            <strong> Fecha:</strong>
+          </ion-label>
+          <ion-text>{{selectedEvent.event_date | date:'dd/MM/yyyy'}}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <ion-icon name="time"></ion-icon>
+            <strong> Hora:</strong>
+          </ion-label>
+          <ion-text>{{selectedEvent.event_time}}</ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="map"></ion-icon>
+            <strong> Ubicación:</strong>
+          </ion-label>
+          <ion-text>{{selectedEvent.location || selectedEvent.address}}</ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="locate"></ion-icon>
+            <strong> Ciudad:</strong>
+          </ion-label>
+          <ion-text>{{selectedEvent.city}}</ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="information-circle"></ion-icon>
+            <strong> Descripcion:</strong>
+          </ion-label>
+          <ion-text>{{selectedEvent.description}}</ion-text>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </div>

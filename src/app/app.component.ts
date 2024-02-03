@@ -12,7 +12,8 @@ import { Storage } from '@ionic/storage-angular';
 export class AppComponent {
   
   constructor(
-    private storage: Storage) {}
+    private storage: Storage
+    ) {}
 
   async ngOnInit() {
     // If using a custom driver:
