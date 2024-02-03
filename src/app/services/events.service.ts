@@ -10,6 +10,7 @@ export class EventsService {
 
   constructor() { }
 
+  // Obtener eventos del servidor
   getEvents() {
     return fetch(`${this.urlServer}/events`).then(
       response => response.json()
@@ -20,12 +21,14 @@ export class EventsService {
     return dataEvents;
   }
 
+  // Obtener categorías del servidor
   getCategories() {
     return fetch(`${this.urlServer}/categories`).then(
       response => response.json()
     );
   }
 
+  // Obtener una categoría por ID del servidor
   getCategoryById(id: number) {
     return fetch(`${this.urlServer}/categories/${id}`).then(
       response => response.json()

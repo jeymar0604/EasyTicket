@@ -51,17 +51,15 @@ export class HomePage {
 
   //Modal para mostrar los detalles del evento
 
-  //Método para mostrar los detalles del evento
-  showEventDetails(event: any) {
-    this.selectedEvent = event; // Almacena el evento seleccionado
+  //Abrir el modal y mostrar los detalles del evento seleccionado
+  setOpen(isOpen: boolean, event: any) {
+    this.isModalOpen = isOpen;
+    this.selectedEvent = event;
   }
 
+  //Cerrar el modal
   closeModal() {
     this.isModalOpen = false; // Cierra el modal
   }
 
-  //Método para abrir el modal
-  setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen; //
-  }
 }

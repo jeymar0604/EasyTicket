@@ -93,4 +93,7 @@ export class LoginPage implements OnInit {
     this.passwordHidden = !this.passwordHidden;
   }
 
+  goBack() {
+    this.navCtrl.navigateBack('/intro');
+  }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 
-
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
@@ -42,7 +41,7 @@ export class MenuPage implements OnInit {
   }
 
   logout() {
-    
+    this.storage.set('userLoggedIn', false); // Almacenar el estado de inicio de sesión
     this.navCtrl.navigateRoot('/login');
   }
 

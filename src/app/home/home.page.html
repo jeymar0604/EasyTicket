@@ -5,14 +5,13 @@
         <ion-menu-button menu="principal"></ion-menu-button>
       </ion-buttons>
       <ion-title
-        class="ion-text-center ion-text-uppercase">Eventos<!--<img src="../../assets/icon/easyticket1.jpg" style="max-width: 15%;">--></ion-title>
+        class="ion-text-center ion-text-uppercase">Eventos</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content class="event-page">
     <ion-content class="event-page">
-      <div *ngFor="let event of event_list" (click)="showEventDetails(event)" (click)="setOpen(true)"
-        class="event-card">
+      <div *ngFor="let event of event_list" (click)="setOpen(true, event)" class="event-card">
         <ion-card>
           <div class="event-info">
             <img src="{{event.image}}" alt="{{event.name}}">
@@ -33,14 +32,15 @@
       </div>
     </ion-content>
   </ion-content>
-  
+
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-title class="ion-text-center ion-text-uppercase">Detalles del Evento</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="setOpen(false)" icon-only><ion-icon name="close"></ion-icon></ion-button>
+            <ion-button (click)="setOpen(false, '')" icon-only><ion-icon name="close"
+                size="large"></ion-icon></ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
